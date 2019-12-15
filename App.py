@@ -43,15 +43,32 @@ def home():
 def get_bot_response():
     userText = request.args.get('msg')
     if(userText.find("name")!=-1):
-        data["name"]=userText
+        li = list(userText.split(" "))
+        for i in li:
+            if(i!="myself" and i!="i" and i!="am" and i!="name" and i!="is" and i!="my"):
+                data["name"]+=" "+i
+
     if(userText.find("age")!=-1):
-        data["age"]=userText
+        li = list(userText.split(" "))
+        for i in li:
+            if(i!="myself" and i!="i" and i!="am" and i!="years" and i!="is" and i!="my"):
+                data["age"]+=i
+
     if(userText.find("male")!=-1 or userText.find("female")!=-1):
         data["sex"]=userText
+
     if(userText.find("address")!=-1):
-        data["add"]=userText
+        li = list(userText.split(" "))
+        for i in li:
+            if(i!="myself" and i!="i" and i!="is" and i!="my" and i!="address"):
+                data["add"]+=i
+
     if(userText.find("buy")!=-1):
-        data["product"]=userText
+        li = list(userText.split(" "))
+        for i in li:
+            if(i!="would" and i!="i" and i!="is" and i!="my" and i!="product" and i!="buy" and i!="to" and i!="like"):
+                data["product"]+=i
+        
 
     print(data)
     return str(bot.get_response(userText))
@@ -59,3 +76,6 @@ def get_bot_response():
  
 if __name__ == "__main__":
     app.run()
+
+
+# 
